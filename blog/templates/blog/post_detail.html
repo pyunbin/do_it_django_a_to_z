@@ -9,7 +9,11 @@
         <title>{{ post.title }} - Blog</title>
 
         <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.min.css' %}" media="screen">
+
         <link rel="stylesheet" href="{% static 'blog/css/blog-post.css' %}" media="screen">
+        <script src="https://kit.fontawesome.com/56c3c24b8c.js" crossorigin="anonymous"></script>
+
+
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/blog-post.css" rel="stylesheet">
     </head>
@@ -65,6 +69,23 @@
 
                         <!-- Post content-->
                         <p> {{ post.content }}</p>
+
+                        {% if post.file_upload %}
+                            <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button">
+                                Download:
+
+                                {% if post.get_file_ext == 'csv' %}
+                                <i class="fa-solid fa-file-csv"></i>
+                                {% if post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
+                                <i class="fa-solid fa-file-excel"></i>
+                                {% if post.get_file_ext == 'docx' or post.get_file_ext == 'doc' %}
+                                <i class="fa-solid fa-file-word"></i>
+                                {% else %}
+                                <i class="fa-solid fa-file"></i>
+                                {% endif %}
+                                {{ post.get_file_name }}
+                            </a>
+                        {% endif %}
 
                         <hr>
 
